@@ -46,9 +46,5 @@ export class AddEditComponent {
         this.repository.deleteInventory(id);
         this.router.navigateByUrl("inventory/list");
     }
-
-    changeTag(){
-        console.log(this.repository.getItem(this.item._id));
-    }
     
 }
