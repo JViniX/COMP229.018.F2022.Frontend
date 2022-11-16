@@ -18,7 +18,12 @@
             </a> 
         </div>
 
-        <div class="table-responsive">
+        <button class="btn" *ngIf="this.repository.listReady == false">
+            <span class="spinner-border spinner-border-sm"></span>
+            Loading..
+        </button>
+
+        <div class="table-responsive" *ngIf="this.repository.listReady == true">
             <table class="table table-bordered table-striped table-hover">
                 <!-- Header Row-->
                 <tr>

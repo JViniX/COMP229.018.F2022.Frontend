@@ -4,7 +4,7 @@ export class Inventory {
         public _id?: string,
         public item?: string,
         public qty?: number,
-        public tags?: string[],
+        public tags?: string,
         public status?: string,
         public size?: Size
     ){}

@@ -3,19 +3,26 @@ import { Inventory } from "./inventory.model";
 import { RestDataSource } from "./rest.datasource";
 import { ResponseModel } from "./response.model";
 
+import { HttpClient } from "@angular/common/http";
+
 @Injectable()
 export class InventoryRepository {
 
     private inventory: Inventory[] = [];
+    listReady: boolean = false;
 
-    constructor(private dataSource: RestDataSource) {
-        dataSource.getInventoryList().subscribe(data => {
-            this.inventory = data;
-        });
+    constructor(private dataSource: RestDataSource) {}
+
+    getInventory(): Inventory[] {        
+        return this.inventory;
     }
 
-    getInventory(): Inventory[] {
-        return this.inventory;
+    setInventory(){
+        this.listReady = false;
+        this.dataSource.getInventoryList().subscribe(data => {
+            this.inventory = data;
+            this.listReady = true;
+        });
     }
 
     getItem(id: string): Inventory {
