@@ -11,6 +11,11 @@ import { InventoryModule } from "./components/inventory/inventory.module";
 import { AddEditComponent } from './components/inventory/add_edit.component';
 import { ListComponent } from './components/inventory/list.component';
 
+import { AuthGuard } from './components/auth/auth.guard';
+import { AuthModule } from './components/auth/auth.module';
+import { SignInComponent } from './components/auth/signin.component';
+import { SignUpComponent } from './components/auth/signup.component';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,15 +25,20 @@ import { ListComponent } from './components/inventory/list.component';
     FormsModule, 
     IndexModule,
     InventoryModule,
+    AuthModule,
     RouterModule.forRoot([
       { path: "", component: IndexComponent},
       { path: "inventory/list", component: ListComponent },
-      { path: "inventory/:mode", component: AddEditComponent},
-      { path: "inventory/:mode/:id", component: AddEditComponent },
+      { path: "inventory/:mode", component: AddEditComponent, canActivate: [AuthGuard]},
+      { path: "inventory/:mode/:id", component: AddEditComponent, canActivate: [AuthGuard] },
+      { path: "users/signin", component: SignInComponent},
+      { path: "users/signup", component: SignUpComponent},
       { path: "**", redirectTo: ""}
     ])
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

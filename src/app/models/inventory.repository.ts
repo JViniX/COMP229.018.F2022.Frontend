@@ -3,8 +3,6 @@ import { Inventory } from "./inventory.model";
 import { RestDataSource } from "./rest.datasource";
 import { ResponseModel } from "./response.model";
 
-import { HttpClient } from "@angular/common/http";
-
 @Injectable()
 export class InventoryRepository {
 
@@ -26,7 +24,8 @@ export class InventoryRepository {
     }
 
     getItem(id: string): Inventory {
-        return Object.assign({}, this.inventory.find(i => i._id === id)!);        
+        return Object.assign({}, this.inventory.find(i => i._id === id)!);      
+        // return (this.inventory.find(i => i._id === id)!);        
     }
 
     async saveInventory(item: Inventory) {
